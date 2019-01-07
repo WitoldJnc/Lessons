@@ -1,0 +1,1 @@
+{private=4, package=1, void=3, import=1, public=13, const=13, this=14, String=2, class=1, int=1, instanceof=1}
