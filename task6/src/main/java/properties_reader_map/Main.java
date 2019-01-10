@@ -3,9 +3,9 @@ package properties_reader_map;
 public class Main {
     public static void main(String[] args) {
         PropertiesReader propertiesReader = new PropertiesReader();
-        propertiesReader.setFile("File");
+        propertiesReader.loadProps("File");
 
-        propertiesReader.readValue("key1");
-        propertiesReader.readValue("key5");
+        propertiesReader.getProperty("key1");
+        propertiesReader.getProperty("key5");
     }
 }

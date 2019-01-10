@@ -3,6 +3,7 @@ package interfaces;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class PersonList {
@@ -10,9 +11,7 @@ public class PersonList {
     private List<Person> people = new ArrayList<>();
 
     public void showinfo() {
-        for (Person person : people) {
-            System.out.println(person);
-        }
+        people.forEach(System.out::println);
         System.out.println();
     }
 
@@ -20,20 +19,24 @@ public class PersonList {
         return people;
     }
 
-    public void setPeople(List<Person> people) {
-        this.people = people;
-    }
 
     public void sortByAge() {
-        Collections.sort(people, ComparePerson.compareByAge);
+        people.sort(((o1, o2) -> o1.getAge() - o2.getAge()));
     }
 
     public void sortByName() {
-        Collections.sort(people, ComparePerson.compareByName);
+        people.sort((((o1, o2) -> o1.getName().compareTo(o2.getName()))));
     }
 
-    public void sortByNameAndAge() {
-        Collections.sort(people, ComparePerson.getCompareByNameAngAge);
+    public void sortByNameAndAge(){
+        people.sort((o1, o2) -> {
+            if(o1.getName().compareTo(o2.getName()) ==0){
+                return o1.getAge() - o2.getAge();
+            } else {
+                return o1.getName().compareTo(o2.getName());
+            }
+        });
     }
+
 
 }

@@ -12,7 +12,6 @@ public class Main {
         personList.getPeople().add(new Person("Aygun", 46));
         personList.getPeople().add(new Person("Elena", 2));
 
-
         personList.sortByAge();
         personList.showinfo();
 
