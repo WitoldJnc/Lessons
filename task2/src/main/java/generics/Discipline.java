@@ -9,4 +9,6 @@ public enum Discipline {
     Discipline(Class<? extends Number> markType) {
         this.markType = markType;
     }
+
+
 }

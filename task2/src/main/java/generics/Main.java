@@ -5,32 +5,47 @@ public class Main {
         Student student1 = new Student("stud1");
         Student student2 = new Student("stud2");
         Student student3 = new Student("stud3");
-        Student student4= new Student("stud4");
+        Student student4 = new Student("stud4");
 
-        Group group = new Group(Discipline.ENGLISH);
-        group.addStudent(student1);
-        group.addStudent(student2);
-        student1.setRating(group, 3.6);
-        student2.setRating(group, 7.2);
+        Group groupEnglish = new Group(Discipline.ENGLISH);
+        Group groupRussian = new Group(Discipline.RUSSIAN);
+        Group groupHistory = new Group(Discipline.HISTORY);
 
+        groupEnglish.addStudent(student1);
+        groupEnglish.addStudent(student2);
+        groupEnglish.addStudent(student3);
 
+        groupRussian.addStudent(student1);
+        groupRussian.addStudent(student3);
 
-        Group group1 = new Group(Discipline.RUSSIAN);
-        group1.addStudent(student1);
-        group1.addStudent(student3);
-        student1.setRating(group1, 5);
-        student3.setRating(group1, 4);
+        groupHistory.addStudent(student1);
+        groupHistory.addStudent(student4);
+        groupHistory.addStudent(student3);
 
-        Group group2 = new Group(Discipline.HISTORY);
-        group2.addStudent(student1);
-        group2.addStudent(student4);
-        group2.addStudent(student3);
-        student1.setRating(group2, 6);
-        student4.setRating(group2, 3);
-        student3.setRating(group2, 8);
+        student1.addMark(groupEnglish, 3.3);
+        student2.addMark(groupEnglish, 7.2);
+        student3.addMark(groupEnglish, 7.2);
 
 
-        System.out.println(student1.getMarksBySubject());
+        student1.addMark(groupRussian, 9);
+        student3.addMark(groupRussian, 4);
+        student2.addMark(groupRussian, 4);
+
+        student1.addMark(groupHistory, 6);
+        student4.addMark(groupHistory, 3);
+        student3.addMark(groupHistory, 8);
+
+
+//        System.out.println(student1.getGroupList() + "  stud1 all marks");
+//        System.out.println(student3.getGroupList() + "  stud3 all marks" );
+//        System.out.println();
+//        System.out.println(student1.getAverageMark() + "  stud1 average mark");
+
+
+
+
+
+
 
     }
 }
