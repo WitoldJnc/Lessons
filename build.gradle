@@ -24,7 +24,12 @@ dependencies {
 
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
+
+    // https://mvnrepository.com/artifact/mysql/mysql-connector-java
+    
+
 }
 
 // Define the main class for the application
 mainClassName = 'Lessons.App'
+

@@ -35,7 +35,7 @@ public class StudentTest {
         student.addMark(groupEnglish, 3.4);
 
         assertEquals(2, groupEnglish.getGroup().size());
-        assertEquals(3.4, student.mapIsCollect(groupEnglish, 3.4));
+        assertEquals(3.4, student.findMark(groupEnglish, 3.4));
 
     }
 
@@ -47,8 +47,8 @@ public class StudentTest {
         groupHisory.addStudent(student);
         student.addMark(groupHisory, 5);
 
-        assertNotNull(groupHisory);
-        assertEquals(5, student.mapIsCollect(groupHisory, 5));
+
+        assertEquals(5, student.findMark(groupHisory, 5));
 
     }
 

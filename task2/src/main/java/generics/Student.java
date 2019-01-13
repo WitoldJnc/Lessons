@@ -35,31 +35,35 @@ public class Student {
             Class<? extends Number> markType = group.getSubject().markType;
             if (mark.getClass().equals(markType)) {
                 groupList.get(group).add(mark);
+                return mark;
             } else {
                 System.out.println("wrong mark type");
             }
         }
-        return mark;
+        return null;
     }
 
 
     public Number getAverageMark() {
-        List<Number> rating = new ArrayList<>();
+        int count = 0;
         double sum = 0.0;
 
         for (List<Number> values : groupList.values()) {
             for (Number number : values) {
                 sum += number.doubleValue();
-                if (sum != 0) {
-                    rating.add(sum);
-                }
+                count++;
             }
         }
-        return (double) Math.round(sum / rating.size() * 100) / 100;
+        return (double) Math.round(sum / count * 100) / 100;
     }
 
-
-    public <T extends Number> Number mapIsCollect(Group group, T num) {
+    /**
+     * @param group
+     * @param num
+     * @param <T>
+     * @return mark if list collect this mark, if not - return null
+     */
+    public <T extends Number> Number findMark(Group group, T num) {
         if (groupList.containsKey(group)) {
             for (List<Number> values : groupList.values()) {
                 if (values.contains(num))
