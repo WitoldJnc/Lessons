@@ -1,20 +1,24 @@
 package application.services_intertaces;
 
-import application.models.Marks;
+import application.models.Mark;
 
 import java.util.List;
 
-public interface MarkService extends GenericService<Marks> {
+public interface MarkService {
 
-
-    double getDisciplineAverageMark(int disciplineId);
+    double getDisciplineAverageMark(String disciplineName);
 
     double getAverageMarkByStudent(int studentId);
 
     void updateMark(int markId, int newMark);
 
-    List<Marks> getAllMarksByStudent(int studentId);
+    List<Mark> getAllMarksByStudent(int studentId);
 
-    List<Marks> getAllMarksByDiscipline(int disciplieId);
+    List<Mark> getAllMarksByDiscipline(String disciplineName);
 
+    List<Mark> getAllMakrs();
+
+    int insertMark(int mark, String disciplineName, int studentId);
+
+    void deleteMarkById(int id);
 }

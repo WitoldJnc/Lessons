@@ -1,47 +1,19 @@
 package application.models;
 
+import lombok.*;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@ToString
 public class Student {
 
-    private String name;
-    private int id;
+    private int studentId;
+    private String studentName;
+    private int groupId;
 
-    public int getId() {
-        return id;
+    public Student(String studentName, int groupId) {
+        this.studentName = studentName;
+        this.groupId = groupId;
     }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public static Student createStudent(String name, int id) {
-        Student student = new Student();
-        student.setName(name);
-        student.setId(id);
-        return student;
-    }
-
-    public static Student createStudent(String name) {
-        Student student = new Student();
-        student.setName(name);
-
-        return student;
-    }
-
-
-    @Override
-    public String toString() {
-        return "Student{" +
-                "name='" + name + '\'' +
-                ", id=" + id +
-                '}';
-    }
-
 }

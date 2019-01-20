@@ -1,6 +1,6 @@
 package application.dao_interfaces;
 
-import application.models.Marks;
+import application.models.Mark;
 
 import java.util.List;
 
@@ -12,16 +12,13 @@ public interface MarkDao {
 
     void updateMark(int markId, int newMark);
 
+    List<Mark> getAllMarksByStudent(int studentId);
 
-    List<Marks> getAllMarksByStudent(int studentId);
+    List<Mark> getAllMarksByDiscipline(int disciplieId);
 
-    List<Marks> getAllMarksByDiscipline(int disciplieId);
+    List<Mark> getAllMakrs();
 
-    List<Marks> getAllMakrs();
-
-    void insertMark(Marks mark);
+    int insertMark(Mark mark);
 
     void deleteMarkById(int id);
-
-
 }

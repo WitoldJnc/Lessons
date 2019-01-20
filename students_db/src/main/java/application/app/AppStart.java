@@ -8,14 +8,7 @@ public class AppStart {
         AbstractApplicationContext context = new
                 AnnotationConfigApplicationContext(ApplicationConfig.class);
 
-//        context.getBean(AppController.class).processStudentService();
-
-//        context.getBean(AppController.class).processDisciplineService();
-//
-//        context.getBean(AppController.class).processStudentGroupService();
-
-//        context.getBean(AppController.class).processMarkService();
-
+        context.getBean(AppController.class);
 
     }
 }

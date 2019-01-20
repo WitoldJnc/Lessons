@@ -1,12 +1,12 @@
 package application.dao_interfaces;
 
-import application.models.Disciplines;
+import application.models.Discipline;
 
 import java.util.List;
 
 public interface DisciplinesDao {
 
-    void insertDiscipline(Disciplines disciplines);
+    int insertDiscipline(Discipline disciplines);
 
     int getCount();
 
@@ -14,9 +14,11 @@ public interface DisciplinesDao {
 
     void updateDisciplineName(int id, String newName);
 
-    List<Disciplines> getDisciplineListByName(String name);
+    Discipline getDisciplineByName(String name);
 
-    Disciplines getDisciplinebyId(int id);
+    int getDisciplineIdByName(String name);
 
-    List<Disciplines> getAllDisciplines();
+    List<Discipline> getDisciplinebyId(int id);
+
+    List<Discipline> getAllDisciplines();
 }

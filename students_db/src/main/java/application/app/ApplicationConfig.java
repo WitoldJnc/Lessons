@@ -38,8 +38,4 @@ public class ApplicationConfig {
         jdbcTemplate.setResultsMapCaseInsensitive(true);
         return jdbcTemplate;
     }
-
-
-
-
 }

@@ -1,7 +1,9 @@
 package application.services_impls;
 
+import application.dao_interfaces.DisciplinesDao;
 import application.dao_interfaces.MarkDao;
-import application.models.Marks;
+import application.dao_interfaces.StudentDao;
+import application.models.Mark;
 import application.services_intertaces.MarkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,12 +14,17 @@ import java.util.List;
 public class MarkServiceImlp implements MarkService {
 
     @Autowired
-   private MarkDao markDao;
+    private MarkDao markDao;
 
+    @Autowired
+    private DisciplinesDao disciplinesDao;
+
+    @Autowired
+    private StudentDao studentDao;
 
     @Override
-    public double getDisciplineAverageMark(int disciplineId) {
-        return markDao.getDisciplineAverageMark(disciplineId);
+    public double getDisciplineAverageMark(String disciplineName) {
+        return markDao.getDisciplineAverageMark(disciplinesDao.getDisciplineIdByName(disciplineName));
     }
 
     @Override
@@ -28,47 +35,32 @@ public class MarkServiceImlp implements MarkService {
     @Override
     public void updateMark(int markId, int newMark) {
         markDao.updateMark(markId, newMark);
-
     }
 
     @Override
-    public List<Marks> getAllMarksByStudent(int studentId) {
+    public List<Mark> getAllMarksByStudent(int studentId) {
         return markDao.getAllMarksByStudent(studentId);
     }
 
     @Override
-    public List<Marks> getAllMarksByDiscipline(int disciplieId) {
-        return markDao.getAllMarksByDiscipline(disciplieId);
-    }
-
-
-    @Override
-    public void insert(Marks mark) {
-        markDao.insertMark(mark);
-
+    public List<Mark> getAllMarksByDiscipline(String disciplineName) {
+        return markDao.getAllMarksByDiscipline(disciplinesDao.getDisciplineIdByName(disciplineName));
     }
 
     @Override
-    public void deleteById(int id) {
-
-        markDao.deleteMarkById(id);
-    }
-
-    @Override
-    public List<Marks> getAll() {
+    public List<Mark> getAllMakrs() {
         return markDao.getAllMakrs();
     }
 
-
     @Override
-    public int getCount() {
-        return 0;
+    public int insertMark(int mark, String disciplineId, int studentId) {
+        return markDao.insertMark(new Mark(mark,
+                disciplinesDao.getDisciplineIdByName(disciplineId),
+                studentId));
     }
 
     @Override
-    public Marks getbyId(int id) {
-        return null;
+    public void deleteMarkById(int id) {
+        markDao.deleteMarkById(id);
     }
-
-
 }

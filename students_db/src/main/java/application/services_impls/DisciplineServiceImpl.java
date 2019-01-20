@@ -1,7 +1,7 @@
 package application.services_impls;
 
 import application.dao_interfaces.DisciplinesDao;
-import application.models.Disciplines;
+import application.models.Discipline;
 import application.services_intertaces.DisciplineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,44 +12,50 @@ import java.util.List;
 public class DisciplineServiceImpl implements DisciplineService {
 
     @Autowired
-   private DisciplinesDao disciplinesDao;
-
+    private DisciplinesDao disciplinesDao;
 
     @Override
-    public void insert(Disciplines disciplines) {
-        disciplinesDao.insertDiscipline(disciplines);
-
+    public int insertDiscipline(String disciplineName) {
+        return disciplinesDao.insertDiscipline(new Discipline(disciplineName));
     }
 
     @Override
     public int getCount() {
         return disciplinesDao.getCount();
     }
-    @Override
-    public void deleteById(int id) {
-        disciplinesDao.deleteDisciplineById(id);
 
+    @Override
+    public void deleteDisciplineByName(String disciplineName) {
+        disciplinesDao.deleteDisciplineById(disciplinesDao.getDisciplineIdByName(disciplineName));
+    }
+
+    @Override
+    public void deleteDisciplineById(int id) {
+        disciplinesDao.deleteDisciplineById(id);
     }
 
     @Override
     public void updateDisciplineName(int id, String newName) {
         disciplinesDao.updateDisciplineName(id, newName);
-
     }
 
     @Override
-    public List<Disciplines> getDisciplineListByName(String name) {
-        return disciplinesDao.getDisciplineListByName(name);
+    public int getDisciplineIdByName(String name) {
+        return disciplinesDao.getDisciplineIdByName(name);
     }
 
+    @Override
+    public Discipline getDisciplineByName(String name) {
+        return disciplinesDao.getDisciplineByName(name);
+    }
 
     @Override
-    public Disciplines getbyId(int id) {
+    public List<Discipline> getDisciplinebyId(int id) {
         return disciplinesDao.getDisciplinebyId(id);
     }
 
     @Override
-    public List<Disciplines> getAll() {
+    public List<Discipline> getAllDisciplines() {
         return disciplinesDao.getAllDisciplines();
     }
 }

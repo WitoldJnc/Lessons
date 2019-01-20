@@ -1,20 +1,17 @@
 package application.app;
 
-import application.models.Disciplines;
-import application.models.Marks;
-import application.models.Student;
-import application.models.StudentGroup;
-import application.services_intertaces.DisciplineService;
-import application.services_intertaces.MarkService;
-import application.services_intertaces.StudentGroupService;
-import application.services_intertaces.StudentService;
+import application.services_intertaces.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 
+import java.util.logging.Logger;
 
-@Configuration
+@Component
+
 public class AppController {
 
+    private static final Logger logger = Logger.getLogger(AppController.class.getName());
 
     @Autowired
     private StudentService studentService;
@@ -23,92 +20,88 @@ public class AppController {
     private DisciplineService disciplineService;
 
     @Autowired
-    private StudentGroupService studentGroupService;
+    private SchoolGroupService studentGroupService;
+
+    @Autowired
+    private GroupDisciplineService groupDisciplineService;
 
     @Autowired
     private MarkService markService;
 
-    private  Student student1 = Student.createStudent("Evgeniy", 10);
-    private  Student student2 = Student.createStudent("Arkadiy", student1.getId() + 1);
+    @Bean
+    public void process() {
 
-    private Disciplines disciplineMath = Disciplines.createDiscipline(3, "Math");
-    private Disciplines disciplinesGeometry = Disciplines.createDiscipline(4, "Geometry");
+        /**
+         * create and insert this in db
+         */
+        disciplineService.insertDiscipline("Geometry");
 
-    private StudentGroup group3 = StudentGroup.createGroup(3, student1.getId(), disciplineMath.getId());
+        logger.info("disciplines  count: " + disciplineService.getCount());
 
-    Marks makForStudentId1 = Marks.createMark(2, 2, 6);
+        logger.info("all disciplines info: " + disciplineService.getAllDisciplines());
 
-    public void processStudentService() {
+        /**
+         * change discipline name by id of "geometry" disciplines
+         */
+        disciplineService.updateDisciplineName(
+                disciplineService.getDisciplineIdByName("Geom"), "Bology");
 
-        studentService.insert(student1);
-        System.out.println(student1.getName() + " are added into studentlist");
+        /**
+         * delete discipline by id where the discipline name refers to the discipline id
+         */
+        disciplineService.deleteDisciplineByName("Fren");
 
-        studentService.insert(student2);
-        System.out.println(student2.getName() + " are added into studentlist");
+        /**
+         * create and insert group into grouplist
+         */
+        studentGroupService.insertGroup(321);
+        studentGroupService.insertGroup(542);
 
-        studentService.updateStudentName(8, "Vavilen");
+        logger.info("all group" + studentGroupService.getAllGroup());
 
-        System.out.println(studentService.getCount() + "all student count");
+        /**
+         * change group number by group id
+         */
+        studentGroupService.updateGroupNumber(2470, 1470);
 
-        System.out.println(studentService.getbyId(4));
+        logger.info("all group" + studentGroupService.getAllGroup());
 
-        System.out.println(studentService.getCount());
+        /**
+         * mapping group and discipline by id
+         */
+        groupDisciplineService.insertGroupDiscipline(542, "Russian");
 
-        studentService.deleteById(9);
+        /**
+         * prin count groups with "russian" dicipline
+         */
+        logger.info("groups with Russian discipline: " + groupDisciplineService.getGroupCountByDiscipline("Russi"));
 
-        System.out.println(studentService.getAll());
+        /**
+         * create and insert new student in group 1470
+         */
+        studentService.insertStudent("Vadim", 1470);
 
-    }
+        logger.info("stdent count in 1470 group: " + studentService.getGroupCount(
+                studentGroupService.getGroupId(1470)));
 
-    public void processDisciplineService() {
+        logger.info("all students count:" + studentService.getStudentCount());
 
+        /**
+         * update group number for student
+         */
+        studentService.updateStudentGroup(
+                studentService.getStudentId("Vadim"),
+                1510);
 
-        disciplineService.insert(disciplineMath);
-        System.out.println(disciplineMath.getName() + " discipline are added");
+        logger.info("all students: " + studentService.getAllStudents());
 
-        disciplineService.insert(disciplinesGeometry);
-        System.out.println(disciplinesGeometry.getName() + " discipline are added");
+        markService.insertMark(5, "English", 5);
 
-        disciplineService.updateDisciplineName(disciplineMath.getId(), "English");
+        logger.info("All mark by Russian discipline: " + markService.getAllMarksByDiscipline("Russian"));
 
-        System.out.println(disciplineService.getCount());
+        logger.info("Average mark by Russian discipline: " +
+                markService.getDisciplineAverageMark("Russian"));
 
-        System.out.println(disciplineService.getbyId(2));
-
-        System.out.println(disciplineService.getAll());
-
-    }
-
-    public void processStudentGroupService(){
-
-        studentGroupService.insert(group3);
-
-        System.out.println(studentGroupService.getAll());
-
-        studentGroupService.updateStudentGroupID(1, 327);
-
-        studentGroupService.deleteStudentFromGroupbyStudentId(10);
-
-        System.out.println(studentGroupService.getGroupListByGroupId(2));
-
-        System.out.println(studentGroupService.getStudentCountInGroup(327));
-
-    }
-
-    public void processMarkService(){
-
-        System.out.println(markService.getAll());
-
-        System.out.println(markService.getAllMarksByDiscipline(1));
-
-        markService.insert(makForStudentId1);
-
-        System.out.println(markService.getAllMarksByStudent(1));
-
-        System.out.println(markService.getAverageMarkByStudent(1));
-
-        System.out.println(markService.getDisciplineAverageMark(2));
-
-        markService.deleteById(4);
+        logger.info("All marks" + markService.getAllMakrs());
     }
 }
