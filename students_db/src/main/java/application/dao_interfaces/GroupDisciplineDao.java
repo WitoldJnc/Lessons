@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface GroupDisciplineDao {
 
-    void insertGroupDiscipline(GroupDiscipline groupDiscipline);
+    void insert(GroupDiscipline groupDiscipline);
 
     void updateGroupByDiscipline(int groupId, int disciplineId);
 

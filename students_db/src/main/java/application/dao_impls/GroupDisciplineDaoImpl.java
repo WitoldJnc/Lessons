@@ -3,7 +3,6 @@ package application.dao_impls;
 import application.dao_interfaces.GroupDisciplineDao;
 import application.models.GroupDiscipline;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -11,16 +10,16 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-@Qualifier("groupDisciplineDao")
 public class GroupDisciplineDaoImpl implements GroupDisciplineDao {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
     @Override
-    public void insertGroupDiscipline(GroupDiscipline groupDiscipline) {
+    public void insert(GroupDiscipline groupDiscipline) {
         String sql = "insert into group_discipline (group_id, discipline_id) VALUES (?, ?);";
         jdbcTemplate.update(sql, groupDiscipline.getGroupId(), groupDiscipline.getDisciplineId());
+
     }
 
     @Override
@@ -64,6 +63,7 @@ public class GroupDisciplineDaoImpl implements GroupDisciplineDao {
         String sql = "select * from group_discipline;";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(GroupDiscipline.class));
     }
+
 
     @Override
     public List<GroupDiscipline> getByGroupId(int groupId) {

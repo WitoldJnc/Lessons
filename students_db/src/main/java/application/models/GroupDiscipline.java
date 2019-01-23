@@ -1,12 +1,15 @@
 package application.models;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Setter
 @Getter
 @ToString
 @NoArgsConstructor
-public class GroupDiscipline {
+public class GroupDiscipline extends AnyObject {
 
     private int groupId;
     private int disciplineId;

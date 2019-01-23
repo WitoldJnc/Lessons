@@ -3,39 +3,29 @@ package application.dao_impls;
 import application.dao_interfaces.MarkDao;
 import application.models.Mark;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository
-@Qualifier("markDao")
-public class MarkDaoImpl implements MarkDao {
+public class MarkDaoImpl extends GenericDaoImpl<Mark> implements MarkDao {
+
+    public MarkDaoImpl() {
+        table = "marks";
+        columnId = "mark_id";
+    }
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
     @Override
-    public int insertMark(Mark mark) {
-        String sql = "insert into marks (mark, discipline_id, student_id)  values" +
-                " ( ?, ?, ?);";
-        jdbcTemplate.update(sql, mark.getMark(),
-                mark.getDisciplineId(), mark.getStudentId());
-        return mark.getMarkId();
-    }
-
-    @Override
     public void updateMark(int markId, int newMark) {
         String sql = "update marks set mark = :? where mark_id = ?;";
         jdbcTemplate.update(sql, newMark, markId);
-    }
-
-    @Override
-    public void deleteMarkById(int id) {
-        String sql = "delete from marks where mark_id = ?;";
-        jdbcTemplate.update(sql, id);
     }
 
     @Override
@@ -65,8 +55,11 @@ public class MarkDaoImpl implements MarkDao {
     }
 
     @Override
-    public List<Mark> getAllMakrs() {
-        String sql = "Select * from marks";
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Mark.class));
+    protected Map<String, Object> insertParams(Mark entity) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("mark", entity.getMark());
+        params.put("discipline_id", entity.getDisciplineId());
+        params.put("student_id", entity.getStudentId());
+        return params;
     }
 }

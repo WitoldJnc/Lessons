@@ -16,9 +16,4 @@ public interface MarkDao {
 
     List<Mark> getAllMarksByDiscipline(int disciplieId);
 
-    List<Mark> getAllMakrs();
-
-    int insertMark(Mark mark);
-
-    void deleteMarkById(int id);
 }

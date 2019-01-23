@@ -1,12 +1,15 @@
 package application.models;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @ToString
-public class Student {
+public class Student extends AnyObject {
 
     private int studentId;
     private String studentName;
