@@ -1,8 +1,7 @@
 package application.app;
 
-import application.dao_impls.*;
+import application.dao_interfaces.*;
 import application.models.Mark;
-import application.models.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
@@ -10,29 +9,28 @@ import org.springframework.stereotype.Component;
 import java.util.logging.Logger;
 
 @Component
-
 public class AppController {
 
     private static final Logger logger = Logger.getLogger(AppController.class.getName());
 
     @Autowired
-    private StudentDaoImpl studentDao;
+    private StudentDao studentDao;
 
     @Autowired
-    private DisciplineDaoImpl disciplineDao;
+    private DisciplinesDao disciplinesDao;
 
     @Autowired
-    private MarkDaoImpl markDao;
+    private MarkDao markDao;
 
     @Autowired
-    private SchoolGroupDaoImpl schoolGroupDao;
+    private SchoolGroupDao schoolGroupDao;
 
     @Autowired
-    private GroupDisciplineDaoImpl groupDisciplineDao;
+    private GroupDisciplineDao groupDisciplineDao;
 
     @Bean
     public void process() {
-
+        System.out.println(markDao.getAllMarksByStudent(1));
 
     }
 }

@@ -17,7 +17,6 @@ public class SchoolGroupDaoImpl extends GenericDaoImpl<SchoolGroup> implements S
 
     public SchoolGroupDaoImpl() {
         table = "school_groups";
-        columnId = "group_id";
     }
 
     @Override

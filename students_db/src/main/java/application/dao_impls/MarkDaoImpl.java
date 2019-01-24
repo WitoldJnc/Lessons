@@ -16,7 +16,6 @@ public class MarkDaoImpl extends GenericDaoImpl<Mark> implements MarkDao {
 
     public MarkDaoImpl() {
         table = "marks";
-        columnId = "mark_id";
     }
 
     @Autowired

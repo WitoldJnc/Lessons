@@ -15,7 +15,6 @@ public class DisciplineDaoImpl extends GenericDaoImpl<Discipline> implements Dis
 
     public DisciplineDaoImpl() {
         table = "disciplines";
-        columnId = "discipline_id";
     }
 
     @Autowired

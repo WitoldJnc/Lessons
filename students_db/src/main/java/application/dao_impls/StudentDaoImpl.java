@@ -19,7 +19,6 @@ public class StudentDaoImpl extends GenericDaoImpl<Student> implements StudentDa
 
     public StudentDaoImpl() {
         table = "students";
-        columnId = "student_id";
     }
 
     @Override
@@ -29,7 +28,7 @@ public class StudentDaoImpl extends GenericDaoImpl<Student> implements StudentDa
     }
 
     @Override
-    public int getStudentId(String studentName) {
+    public int findByName(String studentName) {
         String sql = "select students.students.student_id from students where students.students.student_name like (?)";
 
         return jdbcTemplate.queryForObject(sql, new Object[]{studentName + "%"}, Integer.class);
@@ -43,7 +42,7 @@ public class StudentDaoImpl extends GenericDaoImpl<Student> implements StudentDa
     }
 
     @Override
-    public List<Student> findByName(String name) {
+    public List<Student> findListByName(String name) {
         String sql = "select * from students where student_name like ( ? );";
         return jdbcTemplate.query(sql, new Object[]{name + "%"},
                 new BeanPropertyRowMapper<>(Student.class));

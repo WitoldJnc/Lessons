@@ -4,7 +4,7 @@ import application.models.Mark;
 
 import java.util.List;
 
-public interface MarkDao {
+public interface MarkDao extends GenericDao<Mark>{
 
     double getDisciplineAverageMark(int disciplineId);
 

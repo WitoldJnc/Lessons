@@ -9,7 +9,7 @@ import lombok.ToString;
 @Getter
 @ToString
 @NoArgsConstructor
-public class GroupDiscipline extends AnyObject {
+public class GroupDiscipline extends AbstractObject {
 
     private int groupId;
     private int disciplineId;

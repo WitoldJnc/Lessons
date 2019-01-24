@@ -4,14 +4,14 @@ import application.models.Student;
 
 import java.util.List;
 
-public interface StudentDao {
+public interface StudentDao extends GenericDao<Student>{
 
     void updateStudentName(int id, String newName);
 
     void updateStudentGroup(int studentId, int groupId);
 
-    int getStudentId(String studentName);
+    int findByName(String studentName);
 
-    List<Student> findByName(String name);
+    List<Student> findListByName(String name);
 
 }

@@ -9,9 +9,9 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-public class SchoolGroup extends AnyObject {
+public class SchoolGroup extends AbstractObject {
 
-    private int groupId;
+    private int id;
     private int groupNumber;
 
     public SchoolGroup(int groupNumber) {
@@ -19,7 +19,7 @@ public class SchoolGroup extends AnyObject {
     }
 
     public SchoolGroup(int groupId, int groupNumber) {
-        this.groupId = groupId;
+        this.id = groupId;
         this.groupNumber = groupNumber;
     }
 }

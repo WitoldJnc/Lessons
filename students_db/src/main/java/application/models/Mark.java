@@ -9,9 +9,9 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-public class Mark extends AnyObject {
+public class Mark extends AbstractObject {
 
-    private int markId;
+    private int id;
     private int mark;
     private int disciplineId;
     private int studentId;

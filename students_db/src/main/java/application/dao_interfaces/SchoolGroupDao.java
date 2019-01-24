@@ -1,6 +1,8 @@
 package application.dao_interfaces;
 
-public interface SchoolGroupDao {
+import application.models.SchoolGroup;
+
+public interface SchoolGroupDao extends GenericDao<SchoolGroup>{
 
     void updateGroupNumber(int groupId, int newGroupNumber);
 

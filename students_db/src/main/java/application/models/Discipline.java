@@ -9,9 +9,9 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-public class Discipline extends AnyObject {
+public class Discipline extends AbstractObject {
 
-    private int disciplineId;
+    private int id;
     private String disciplineName;
 
     public Discipline(String disciplineName) {
@@ -19,7 +19,7 @@ public class Discipline extends AnyObject {
     }
 
     public Discipline(int disciplineId, String disciplineName) {
-        this.disciplineId = disciplineId;
+        this.id = disciplineId;
         this.disciplineName = disciplineName;
     }
 }

@@ -1,7 +1,7 @@
 package application.dao_impls;
 
 import application.dao_interfaces.GenericDao;
-import application.models.AnyObject;
+import application.models.AbstractObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -13,17 +13,16 @@ import java.util.List;
 import java.util.Map;
 
 @SuppressWarnings("unchecked")
-public abstract class GenericDaoImpl<T extends AnyObject> implements GenericDao<T> {
+public abstract class GenericDaoImpl<T extends AbstractObject> implements GenericDao<T> {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
     protected String table;
-    protected String columnId;
 
     @Override
     public void deleteById(Integer id) {
-        String sql = "DELETE FROM " + table + " WHERE " + columnId + " =?";
+        String sql = "DELETE FROM " + table + " WHERE id = ?";
         jdbcTemplate.update(sql, id);
     }
 
@@ -35,7 +34,7 @@ public abstract class GenericDaoImpl<T extends AnyObject> implements GenericDao<
 
     @Override
     public T getById(Integer id) {
-        String sql = "Select * from " + table + " where " + columnId + " =?";
+        String sql = "Select * from " + table + " where id = ?";
         return jdbcTemplate.queryForObject(sql, new Object[]{id}, new BeanPropertyRowMapper<>(genericClass));
     }
 
@@ -50,7 +49,7 @@ public abstract class GenericDaoImpl<T extends AnyObject> implements GenericDao<
     @Override
     public Integer insert(T object) {
         SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
-        jdbcInsert.withTableName(table).usingGeneratedKeyColumns(columnId);
+        jdbcInsert.withTableName(table).usingGeneratedKeyColumns("id");
         return jdbcInsert.executeAndReturnKey(new MapSqlParameterSource(insertParams(object))).intValue();
     }
 
