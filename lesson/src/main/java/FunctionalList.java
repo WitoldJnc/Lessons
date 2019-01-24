@@ -1,42 +1,33 @@
-
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import java.util.stream.Collectors;
 
 public class FunctionalList {
 
-    private List<Integer> marklist = new ArrayList<>();
+    private List<Integer> marklist;
 
-
-    public List<Integer> returnRandomMark() {
-        for (int i = 0; i < 7; i++) {
-            Integer random = (int) (Math.random() * 30);
-            marklist.add(random);
-
-        }
-        System.out.println("random");
+    public List<Integer> returnRandom() {
+        marklist = new Random()
+                .ints(0, 21)
+                .limit(6)
+                .boxed()
+                .collect(Collectors.toList());
         return marklist;
-
     }
 
     public Number returnSumAllMark() {
-        Integer sum = 0;
-        for (Integer integer : marklist) {
-            sum += integer;
-        }
-        System.out.println("sum");
-        return sum;
+        return marklist.stream()
+                .mapToInt(Integer::intValue)
+                .sum();
+
     }
 
     public Number returnAverageMark() {
-        Integer sum = 0;
+        return marklist.stream()
+                .mapToInt(Integer::intValue)
+                .average()
+                .getAsDouble();
 
-        for (Integer integer :marklist) {
-            sum += integer;
-        }
-        System.out.println("average");
-        return (double)sum/marklist.size();
     }
-
-
 
 }

@@ -1,0 +1,36 @@
+plugins {
+    id 'java'
+
+    id "org.flywaydb.flyway" version "5.2.4"
+
+}
+
+version 'unspecified'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+
+    compile group: 'org.springframework', name: 'spring-context', version: '5.1.4.RELEASE'
+    compile group: 'org.springframework', name: 'spring-context-support', version: '5.1.4.RELEASE'
+    compile group: 'org.springframework', name: 'spring-jdbc', version: '5.1.4.RELEASE'
+    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.13'
+
+    jooqRuntime 'jdbc:mysql://localhost:3306/students?true&useSSL=false'
+
+    compileOnly 'org.projectlombok:lombok:1.18.4'
+
+}
+
+flyway {
+    url = 'jdbc:mysql://localhost:3306/students?useSll=false'
+    user = 'root'
+    password = 'root'
+    schemas = ['students']
+}
+

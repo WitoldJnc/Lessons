@@ -18,4 +18,6 @@ include 'task5'
 include 'task6'
 include 'task1'
 include 'lesson'
+include 'SpringTest'
+include 'students_db'
 

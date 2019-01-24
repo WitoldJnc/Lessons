@@ -1,9 +1,9 @@
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class FunctionalMap {
     private Map<String, List<Integer>> markList = new HashMap<>();
-
 
     public void addMark(String key, Integer value) {
         List<Integer> listmark = new ArrayList<>();
@@ -11,15 +11,12 @@ public class FunctionalMap {
         markList.put(key, listmark);
     }
 
-
     public Number getSumOfMap() {
-        Integer sum = 0;
-        for (List<Integer> value : markList.values()) {
-            for (int i = 0; i < value.size(); i++) {
-                sum += value.get(i);
-            }
-        }
-        return sum;
+        return markList.values().stream()
+                .flatMapToInt(list -> list.stream()
+                        .mapToInt(Integer::intValue))
+                .sum();
+
     }
 
     public List<Integer> getAverageMarkOfMapForEach() {
@@ -32,25 +29,18 @@ public class FunctionalMap {
                 sum += value.get(i);
 
             }
-            averege = sum/value.size();
+            averege = sum / value.size();
             intlist.add(averege);
         }
         return intlist;
     }
 
-
-    public Number getAllAverage(){
-        List<Integer> intlist = new ArrayList<>();
-        Integer sum = 0;
-
-        for(List<Integer> value : markList.values()){
-            for (int i = 0; i < value.size(); i++) {
-                sum += value.get(i);
-            }
-            intlist.add(sum);
-        }
-
-        return (double)sum/intlist.size();
+    public Number getAllAverage() {
+        return markList.values().stream()
+                .flatMapToInt(list -> list.stream()
+                        .mapToInt(Integer::intValue))
+                .average()
+                .getAsDouble();
     }
 
 }
