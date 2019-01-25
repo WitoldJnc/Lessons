@@ -67,7 +67,7 @@ target/
 .idea/
 
 #Ignore META-INF
-META-INF
+*/META-INF/*
 
 # eclipse project file
 .settings/
