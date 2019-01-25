@@ -66,6 +66,9 @@ target/
 *.ipr
 .idea/
 
+#Ignore META-INF
+META-INF
+
 # eclipse project file
 .settings/
 .classpath
